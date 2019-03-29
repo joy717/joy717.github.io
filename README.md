@@ -1,6 +1,6 @@
 ## Welcome to joy717's world!
 
-[starter](/k8s_starter)
+[starter](/blog/k8s_starter)
 
 You can use the [editor on GitHub](https://github.com/joy717/blog/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
