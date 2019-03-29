@@ -23,6 +23,7 @@
 而部分上层runtime，在基础功能部分，不一定是自己实现，而是直接使用了其他的底层runtime，也就是在底层runtime，外面又包了一层，提供了更加丰富的功能。比较典型的例子：(Docker) `containerd`，是一个上层runtime，但是底层功能（与namespaces、cgroups等操作）却使用了`runc`这么一个底层的runtime。这样做的好处是，其中一个是可以解耦。也更“微服务化”。
 
 以上参考：
+
 [参考1](https://www.ianlewis.org/en/container-runtimes-part-1-introduction-container-r) 系列
 
 [参考2](https://jvns.ca/blog/2016/10/10/what-even-is-a-container/)
