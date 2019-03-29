@@ -1,6 +1,6 @@
 ## Welcome to joy717's world!
 
-[starter](/blog/k8s_starter)
+[基础概念](/blog/k8s_starter)
 
 [Blue-Green Deployment  VS Canary Release VS AB-Testing](/blog/blue-green_vs_canary_vs_ab-testing)
 
