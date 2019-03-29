@@ -30,23 +30,23 @@
 
 类似的，每个Pod都有其自身的netns，通过一个虚拟的以太网对连接到root netns。这基本上就是一个管道对，一端在root netns内，另一端在Pod的nens内。
 
-我们把Pod端的网络接口叫 <font color=red><span style='background: pink'>eth0</span></font>，这样Pod就不需要知道底层主机，它认为它拥有自己的根网络设备。另一端命名成比如 <font color=red><span style='background: pink'>vethxxx</span></font>。你可以用<font color=red><span style='background: pink'>ifconfig</span></font> 或者 <font color=red><span style='background: pink'>ip a</span></font>命令列出你的节点上的所有这些接口。
+我们把Pod端的网络接口叫 <font color="red"><span style='background: pink'>eth0</span></font>，这样Pod就不需要知道底层主机，它认为它拥有自己的根网络设备。另一端命名成比如 <font color="red"><span style='background: pink'>vethxxx</span></font>。你可以用<font color="red"><span style='background: pink'>ifconfig</span></font> 或者 <font color="red"><span style='background: pink'>ip a</span></font>命令列出你的节点上的所有这些接口。
 
 ![Kubernetes Node（linux network bridge）](https://wiki.chinanetcenter.com/html/doc/20180720/415320732149685856.png "Kubernetes Node（linux network bridge）")
 *Kubernetes Node（linux network bridge）*
 
-节点上的所有Pod都会完成这个过程。这些Pod要相互通信，就要用到linux的以太网桥 <font color=red><span style='background: pink'>cbr0</span></font> 了。Docker使用了类似的网桥，称为<font color=red><span style='background: pink'>docker0</span></font>。
+节点上的所有Pod都会完成这个过程。这些Pod要相互通信，就要用到linux的以太网桥 <font color="red"><span style='background: pink'>cbr0</span></font> 了。Docker使用了类似的网桥，称为<font color="red"><span style='background: pink'>docker0</span></font>。
 
-你可以用 <font color=red><span style='background: pink'>brctl show</span></font> 命令列出所有网桥。
+你可以用 <font color="red"><span style='background: pink'>brctl show</span></font> 命令列出所有网桥。
 
 ![Kubernetes Node（same node pod-to-pod communication）](https://wiki.chinanetcenter.com/html/doc/20180720/515320733183832057.gif "Kubernetes Node（same node pod-to-pod communication）")
 *Kubernetes Node（same node pod-to-pod communication）*
 
-假设一个网络数据包要由<font color=red><span style='background: pink'>pod1</span></font>到<font color=red><span style='background: pink'>pod2</span></font>。
-1. 它由pod1中netns的<font color=red><span style='background: pink'>eth0</span></font>网口离开，通过<font color=red><span style='background: pink'>vethxxx</span></font>进入root netns。
-2. 然后被传到<font color=red><span style='background: pink'>cbr0</span></font>，<font color=red><span style='background: pink'>cbr0</span></font>使用ARP请求，说“谁拥有这个IP”，从而发现目标地址。
-3. <font color=red><span style='background: pink'>vethyyy</span></font>说它有这个IP，因此网桥就知道了往哪里转发这个包。
-4. 数据包到达<font color=red><span style='background: pink'>vethyyy</span></font>，跨过管道对，到达<font color=red><span style='background: pink'>pod2</span></font>的netns。
+假设一个网络数据包要由<font color="red"><span style='background: pink'>pod1</span></font>到<font color="red"><span style='background: pink'>pod2</span></font>。
+1. 它由pod1中netns的<font color="red"><span style='background: pink'>eth0</span></font>网口离开，通过<font color="red"><span style='background: pink'>vethxxx</span></font>进入root netns。
+2. 然后被传到<font color="red"><span style='background: pink'>cbr0</span></font>，<font color="red"><span style='background: pink'>cbr0</span></font>使用ARP请求，说“谁拥有这个IP”，从而发现目标地址。
+3. <font color="red"><span style='background: pink'>vethyyy</span></font>说它有这个IP，因此网桥就知道了往哪里转发这个包。
+4. 数据包到达<font color="red"><span style='background: pink'>vethyyy</span></font>，跨过管道对，到达<font color="red"><span style='background: pink'>pod2</span></font>的netns。
 
 这就是同一节点内容器间通信的流程。当然也可以用其它方式，但是无疑这是最简单的方式，同时也是Docker采用的方式。
 
@@ -60,16 +60,16 @@
 ![Kubernetes Nodes with route table（cross node pod-to-pod communication）](https://wiki.chinanetcenter.com/html/doc/20180720/615320736260888798.gif "Kubernetes Nodes with route table（cross node pod-to-pod communication）")
 *Kubernetes Nodes with route table（cross node pod-to-pod communication）*
 
-假设一个数据包要从<font color=red><span style='background: pink'>pod1</span></font>到达<font color=red><span style='background: pink'>pod4</span></font>（在不同的节点上）。
-1. 它由<font color=red><span style='background: pink'>pod1</span></font>中netns的<font color=red><span style='background: pink'>eth0</span></font>网口离开，通过<font color=red><span style='background: pink'>vethxxx</span></font>进入root netns。
-2. 然后被传到<font color=red><span style='background: pink'>cbr0</span></font>，<font color=red><span style='background: pink'>cbr0</span></font>通过发送ARP请求来找到目标地址。
-3. 本节点上没有Pod拥有<font color=red><span style='background: pink'>pod4</span></font>的IP地址，因此数据包由<font color=red><span style='background: pink'>cbr0</span></font> 传到 主网络接口 <font color=red><span style='background: pink'>eth0</span></font>.
-4. 数据包的源地址为<font color=red><span style='background: pink'>pod1</span></font>，目标地址为<font color=red><span style='background: pink'>pod4</span></font>，它以这种方式离开<font color=red><span style='background: pink'>node1</span></font>进入电缆。
-5. 路由表有每个节点的CIDR块的路由设定，它把数据包路由到CIDR块包含<font color=red><span style='background: pink'>pod4</span></font>的IP的节点。
-6. 因此数据包到达了<font color=red><span style='background: pink'>node2</span></font>的主网络接口<font color=red><span style='background: pink'>eth0</span></font>。现在即使<font color=red><span style='background: pink'>pod4</span></font>不是<font color=red><span style='background: pink'>eth0</span></font>的IP，数据包也仍然能转发到<font color=red><span style='background: pink'>cbr0</span></font>，因为节点配置了IP forwarding enabled。节点的路由表寻找任意能匹配<font color=red><span style='background: pink'>pod4</span></font> IP的路由。它发现了 <font color=red><span style='background: pink'>cbr0</span></font> 是这个节点的CIDR块的目标地址。你可以用<font color=red><span style='background: pink'>route -n</span></font>命令列出该节点的路由表，它会显示<font color=red><span style='background: pink'>cbr0</span></font>的路由，类型如下：
+假设一个数据包要从<font color="red"><span style='background: pink'>pod1</span></font>到达<font color="red"><span style='background: pink'>pod4</span></font>（在不同的节点上）。
+1. 它由<font color="red"><span style='background: pink'>pod1</span></font>中netns的<font color="red"><span style='background: pink'>eth0</span></font>网口离开，通过<font color="red"><span style='background: pink'>vethxxx</span></font>进入root netns。
+2. 然后被传到<font color="red"><span style='background: pink'>cbr0</span></font>，<font color="red"><span style='background: pink'>cbr0</span></font>通过发送ARP请求来找到目标地址。
+3. 本节点上没有Pod拥有<font color="red"><span style='background: pink'>pod4</span></font>的IP地址，因此数据包由<font color="red"><span style='background: pink'>cbr0</span></font> 传到 主网络接口 <font color="red"><span style='background: pink'>eth0</span></font>.
+4. 数据包的源地址为<font color="red"><span style='background: pink'>pod1</span></font>，目标地址为<font color="red"><span style='background: pink'>pod4</span></font>，它以这种方式离开<font color="red"><span style='background: pink'>node1</span></font>进入电缆。
+5. 路由表有每个节点的CIDR块的路由设定，它把数据包路由到CIDR块包含<font color="red"><span style='background: pink'>pod4</span></font>的IP的节点。
+6. 因此数据包到达了<font color="red"><span style='background: pink'>node2</span></font>的主网络接口<font color="red"><span style='background: pink'>eth0</span></font>。现在即使<font color="red"><span style='background: pink'>pod4</span></font>不是<font color="red"><span style='background: pink'>eth0</span></font>的IP，数据包也仍然能转发到<font color="red"><span style='background: pink'>cbr0</span></font>，因为节点配置了IP forwarding enabled。节点的路由表寻找任意能匹配<font color="red"><span style='background: pink'>pod4</span></font> IP的路由。它发现了 <font color="red"><span style='background: pink'>cbr0</span></font> 是这个节点的CIDR块的目标地址。你可以用<font color="red"><span style='background: pink'>route -n</span></font>命令列出该节点的路由表，它会显示<font color="red"><span style='background: pink'>cbr0</span></font>的路由，类型如下：
 ![7](https://wiki.chinanetcenter.com/html/doc/20180720/715320739031503014.png "7")
-7. 网桥接收了数据包，发送ARP请求，发现目标IP属于<font color=red><span style='background: pink'>vethyyy</span></font>。
-8. 数据包跨过管道对到达<font color=red><span style='background: pink'>pod4</span></font>。
+7. 网桥接收了数据包，发送ARP请求，发现目标IP属于<font color="red"><span style='background: pink'>vethyyy</span></font>。
+8. 数据包跨过管道对到达<font color="red"><span style='background: pink'>pod4</span></font>。
 
 这就是Kubernetes网络的基础。下次你碰到问题，务必先检查这些网桥和路由表。
 
@@ -94,17 +94,17 @@ Overlay网络不是默认必须的，但是它们在特定场景下非常有用�
 
 这里我们注意到它和之前我们看到的设施是一样的，只是在root netns中新增了一个虚拟的以太网设备，称为flannel0。它是虚拟扩展网络Virtual Extensible LAN（VXLAN）的一种实现，但是在Linux上，它只是另一个网络接口。
 
-从<font color=red><span style='background: pink'>pod1</span></font>到<font color=red><span style='background: pink'>pod4</span></font>（在不同节点）的数据包的流向类似如下：
+从<font color="red"><span style='background: pink'>pod1</span></font>到<font color="red"><span style='background: pink'>pod4</span></font>（在不同节点）的数据包的流向类似如下：
 
-  1、它由<font color=red><span style='background: pink'>pod1</span></font>中netns的<font color=red><span style='background: pink'>eth0</span></font>网口离开，通过<font color=red><span style='background: pink'>vethxxx</span></font>进入root netns。
+  1、它由<font color="red"><span style='background: pink'>pod1</span></font>中netns的<font color="red"><span style='background: pink'>eth0</span></font>网口离开，通过<font color="red"><span style='background: pink'>vethxxx</span></font>进入root netns。
 
-  2、然后被传到<font color=red><span style='background: pink'>cbr0</span></font>，<font color=red><span style='background: pink'>cbr0</span></font>通过发送ARP请求来找到目标地址。
+  2、然后被传到<font color="red"><span style='background: pink'>cbr0</span></font>，<font color="red"><span style='background: pink'>cbr0</span></font>通过发送ARP请求来找到目标地址。
 
-  3a、由于本节点上没有Pod拥有<font color=red><span style='background: pink'>pod4</span></font>的IP地址，因此网桥把数据包发送给了<font color=red><span style='background: pink'>flannel0</span></font>，因为节点的路由表上<font color=red><span style='background: pink'>flannel0</span></font>被配成了Pod网段的目标地址。
+  3a、由于本节点上没有Pod拥有<font color="red"><span style='background: pink'>pod4</span></font>的IP地址，因此网桥把数据包发送给了<font color="red"><span style='background: pink'>flannel0</span></font>，因为节点的路由表上<font color="red"><span style='background: pink'>flannel0</span></font>被配成了Pod网段的目标地址。
 
   3b、flanneld daemon和Kubernetes apiserver或者底层的etcd通信，它知道所有的Pod IP，并且知道它们在哪个节点上。因此Flannel创建了Pod IP和Node IP之间的映射（在用户空间）。
 
-<font color=red><span style='background: pink'>flannel0</span></font>取到这个包，并在其上再用一个UDP包封装起来，该UDP包头部的源和目的IP分别被改成了对应节点的IP，然后发送这个新包到特定的VXLAN端口（通常是8472）。
+<font color="red"><span style='background: pink'>flannel0</span></font>取到这个包，并在其上再用一个UDP包封装起来，该UDP包头部的源和目的IP分别被改成了对应节点的IP，然后发送这个新包到特定的VXLAN端口（通常是8472）。
 
 ![Packet-in-packet encapsulation（notice the packet is encapsulated from 3c to 6b in previous diagram）](https://wiki.chinanetcenter.com/html/doc/20180720/915320744418225769.png "Packet-in-packet encapsulation（notice the packet is encapsulated from 3c to 6b in previous diagram）")
 
@@ -112,23 +112,23 @@ Overlay网络不是默认必须的，但是它们在特定场景下非常有用�
 
 尽管这个映射发生在用户空间，真实的封装以及数据的流动发生在内核空间，因此仍然是很快的。
 
-  3c、封装后的包通过<font color=red><span style='background: pink'>eth0</span></font>发送出去，因为它涉及了节点间的路由流量。
+  3c、封装后的包通过<font color="red"><span style='background: pink'>eth0</span></font>发送出去，因为它涉及了节点间的路由流量。
 
   4、包带着节点IP信息作为源和目的地址离开本节点。
 
-  5、云提供商的路由表已经知道了如何在节点间发送报文，因此该报文被发送到目标地址<font color=red><span style='background: pink'>node2</span></font>。
+  5、云提供商的路由表已经知道了如何在节点间发送报文，因此该报文被发送到目标地址<font color="red"><span style='background: pink'>node2</span></font>。
 
-  6a、包到达<font color=red><span style='background: pink'>node2</span></font>的<font color=red><span style='background: pink'>eth0</span></font>网卡，由于目标端口是特定的VXLAN端口，内核将报文发送给了 <font color=red><span style='background: pink'>flannel0</span></font>。
+  6a、包到达<font color="red"><span style='background: pink'>node2</span></font>的<font color="red"><span style='background: pink'>eth0</span></font>网卡，由于目标端口是特定的VXLAN端口，内核将报文发送给了 <font color="red"><span style='background: pink'>flannel0</span></font>。
 
-  6b、<font color=red><span style='background: pink'>flannel0</span></font>解封报文，并将其发送到 root 命名空间下。
+  6b、<font color="red"><span style='background: pink'>flannel0</span></font>解封报文，并将其发送到 root 命名空间下。
 
 从这里开始，报文的路径和我们之前在Part 1 中看到的非Overlay网络就是一致的了。
 
-  6c、由于IP forwarding开启着，内核按照路由表将报文转发给了<font color=red><span style='background: pink'>cbr0</span></font>。
+  6c、由于IP forwarding开启着，内核按照路由表将报文转发给了<font color="red"><span style='background: pink'>cbr0</span></font>。
 
-  7、网桥获取到了包，发送ARP请求，发现目标IP属于<font color=red><span style='background: pink'>vethyyy</span></font>。
+  7、网桥获取到了包，发送ARP请求，发现目标IP属于<font color="red"><span style='background: pink'>vethyyy</span></font>。
 
-  8、包跨过管道对到达<font color=red><span style='background: pink'>pod4</span></font>。
+  8、包跨过管道对到达<font color="red"><span style='background: pink'>pod4</span></font>。
 
 这就是Kubernetes中Overlay网络的工作方式，虽然不同的实现还是会有细微的差别。有个常见的误区是，当我们使用Kubernetes，我们就不得不使用Overlay网路。事实是，这完全依赖于特定场景。因此请确保在确实需要的场景下才使用。
 
