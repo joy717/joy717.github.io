@@ -3,7 +3,7 @@
 
 你一直在Kubernetes集群中运行一系列服务并已从中获益，或者你正打算这么做。尽管有一系列工具能帮助你建立并管理集群，你仍困惑于集群底层是如何工作的，以及出现问题该如何处理。我曾经就是这样的。
 
-![1](/blog/images/1.png "1")
+![1](/blog/images/k8s_networking/1.png "1")
 诚然Kubernetes对初学者来说已足够易用，但我们仍然不得不承认，它的底层实现异常复杂。Kubernetes由许多部件组成，如果你想对失败场景做好应对准备，那么你必须知道各部件是如何协调工作的。其中一个最复杂，甚至可以说是最关键的部件就是网络。
 
 因此我着手精确理解Kubernetes网络是如何工作的。我阅读了许多文章，看了很多演讲，甚至浏览了代码库。以下就是我的所得。
@@ -18,28 +18,28 @@
 ## 节点内通信
 
 第一步是确保同一节点上的Pod可以相互通信，然后可以扩展到跨节点通信、internet上的通信，等等。
-![Kubernetes Node（root network namespace）](/blog/images/2.png "Kubernetes Node（root network namespace）")
+![Kubernetes Node（root network namespace）](/blog/images/k8s_networking/2.png "Kubernetes Node（root network namespace）")
 *Kubernetes Node（root network namespace）*
 
 在每个Kubernetes节点（本场景指的是Linux机器）上，都有一个根（root）命名空间（root是作为基准，而不是超级用户）--root netns。
 
 最主要的网络接口 <font color="red"><span style='background: pink'>eth0</span></font> 就是在这个root netns下。
 
-![3](/blog/images/3.png "3")
+![3](/blog/images/k8s_networking/3.png "3")
 *Kubernetes Node（pod network namespace）*
 
 类似的，每个Pod都有其自身的netns，通过一个虚拟的以太网对连接到root netns。这基本上就是一个管道对，一端在root netns内，另一端在Pod的nens内。
 
 我们把Pod端的网络接口叫 <font color="red"><span style='background: pink'>eth0</span></font>，这样Pod就不需要知道底层主机，它认为它拥有自己的根网络设备。另一端命名成比如 <font color="red"><span style='background: pink'>vethxxx</span></font>。你可以用<font color="red"><span style='background: pink'>ifconfig</span></font> 或者 <font color="red"><span style='background: pink'>ip a</span></font>命令列出你的节点上的所有这些接口。
 
-![Kubernetes Node（linux network bridge）](/blog/images/4.png "Kubernetes Node（linux network bridge）")
+![Kubernetes Node（linux network bridge）](/blog/images/k8s_networking/4.png "Kubernetes Node（linux network bridge）")
 *Kubernetes Node（linux network bridge）*
 
 节点上的所有Pod都会完成这个过程。这些Pod要相互通信，就要用到linux的以太网桥 <font color="red"><span style='background: pink'>cbr0</span></font> 了。Docker使用了类似的网桥，称为<font color="red"><span style='background: pink'>docker0</span></font>。
 
 你可以用 <font color="red"><span style='background: pink'>brctl show</span></font> 命令列出所有网桥。
 
-![Kubernetes Node（same node pod-to-pod communication）](/blog/images/5.gif "Kubernetes Node（same node pod-to-pod communication）")
+![Kubernetes Node（same node pod-to-pod communication）](/blog/images/k8s_networking/5.gif "Kubernetes Node（same node pod-to-pod communication）")
 *Kubernetes Node（same node pod-to-pod communication）*
 
 假设一个网络数据包要由<font color="red"><span style='background: pink'>pod1</span></font>到<font color="red"><span style='background: pink'>pod2</span></font>。
@@ -57,7 +57,7 @@
 
 这里我们有两个节点，与之前看到的类似。每个节点有不同的网络命名空间、网络接口以及网桥。
 
-![Kubernetes Nodes with route table（cross node pod-to-pod communication）](/blog/images/6.gif "Kubernetes Nodes with route table（cross node pod-to-pod communication）")
+![Kubernetes Nodes with route table（cross node pod-to-pod communication）](/blog/images/k8s_networking/6.gif "Kubernetes Nodes with route table（cross node pod-to-pod communication）")
 *Kubernetes Nodes with route table（cross node pod-to-pod communication）*
 
 假设一个数据包要从<font color="red"><span style='background: pink'>pod1</span></font>到达<font color="red"><span style='background: pink'>pod4</span></font>（在不同的节点上）。
@@ -67,7 +67,7 @@
 4. 数据包的源地址为<font color="red"><span style='background: pink'>pod1</span></font>，目标地址为<font color="red"><span style='background: pink'>pod4</span></font>，它以这种方式离开<font color="red"><span style='background: pink'>node1</span></font>进入电缆。
 5. 路由表有每个节点的CIDR块的路由设定，它把数据包路由到CIDR块包含<font color="red"><span style='background: pink'>pod4</span></font>的IP的节点。
 6. 因此数据包到达了<font color="red"><span style='background: pink'>node2</span></font>的主网络接口<font color="red"><span style='background: pink'>eth0</span></font>。现在即使<font color="red"><span style='background: pink'>pod4</span></font>不是<font color="red"><span style='background: pink'>eth0</span></font>的IP，数据包也仍然能转发到<font color="red"><span style='background: pink'>cbr0</span></font>，因为节点配置了IP forwarding enabled。节点的路由表寻找任意能匹配<font color="red"><span style='background: pink'>pod4</span></font> IP的路由。它发现了 <font color="red"><span style='background: pink'>cbr0</span></font> 是这个节点的CIDR块的目标地址。你可以用<font color="red"><span style='background: pink'>route -n</span></font>命令列出该节点的路由表，它会显示<font color="red"><span style='background: pink'>cbr0</span></font>的路由，类型如下：
-![7](/blog/images/7.png "7")
+![7](/blog/images/k8s_networking/7.png "7")
 7. 网桥接收了数据包，发送ARP请求，发现目标IP属于<font color="red"><span style='background: pink'>vethyyy</span></font>。
 8. 数据包跨过管道对到达<font color="red"><span style='background: pink'>pod4</span></font>。
 
@@ -76,7 +76,7 @@
 #图解Kubernetes网络（二）
 【编者的话】本文是Kubernetes网络系列的第二部分，详细阐述了Overlay网络在Kubernetes中的工作模式，并指出Overlay不是必须的，只有当我们知道为什么要使用Overlay模式时才使用它。
 
-![1](/blog/images/8.png "1")
+![1](/blog/images/k8s_networking/8.png "1")
 
 这篇文章的前一部分，我们漫谈了Kubernetes的网络模型。我们观察了数据包是如何在同一节点上的pod 间和跨节点的 pod 间流动的。我们也注意到了Linux网桥和路由表在这个过程中所扮演的角色。
 
@@ -89,7 +89,7 @@ Overlay网络不是默认必须的，但是它们在特定场景下非常有用�
 
 为了理解Overlay网络中流量的流向，我们拿Flannel做例子，它是CoreOS 的一个开源项目。
 
-![Kubernetes Node with route table（cross node pod-to-pop Traffic flow with flannel overlay network）](/blog/images/9.gif "Kubernetes Node with route table（cross node pod-to-pop Traffic flow with flannel overlay network）")
+![Kubernetes Node with route table（cross node pod-to-pop Traffic flow with flannel overlay network）](/blog/images/k8s_networking/9.gif "Kubernetes Node with route table（cross node pod-to-pop Traffic flow with flannel overlay network）")
 *Kubernetes Node with route table（cross node pod-to-pop Traffic flow with flannel overlay network）*
 
 这里我们注意到它和之前我们看到的设施是一样的，只是在root netns中新增了一个虚拟的以太网设备，称为flannel0。它是虚拟扩展网络Virtual Extensible LAN（VXLAN）的一种实现，但是在Linux上，它只是另一个网络接口。
@@ -106,7 +106,7 @@ Overlay网络不是默认必须的，但是它们在特定场景下非常有用�
 
 <font color="red"><span style='background: pink'>flannel0</span></font>取到这个包，并在其上再用一个UDP包封装起来，该UDP包头部的源和目的IP分别被改成了对应节点的IP，然后发送这个新包到特定的VXLAN端口（通常是8472）。
 
-![Packet-in-packet encapsulation（notice the packet is encapsulated from 3c to 6b in previous diagram）](/blog/images/10.png "Packet-in-packet encapsulation（notice the packet is encapsulated from 3c to 6b in previous diagram）")
+![Packet-in-packet encapsulation（notice the packet is encapsulated from 3c to 6b in previous diagram）](/blog/images/k8s_networking/10.png "Packet-in-packet encapsulation（notice the packet is encapsulated from 3c to 6b in previous diagram）")
 
 *Packet-in-packet encapsulation（notice the packet is encapsulated from 3c to 6b in previous diagram）*
 
