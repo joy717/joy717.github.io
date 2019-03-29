@@ -1,6 +1,7 @@
 ## Welcome to joy717's world!
 
 [starter](/blog/k8s_starter)
+[Blue-Green Deployment  VS Canary Release VS AB-Testing](/blog/blue-green_vs_canary_vs_ab-testing)
 
 You can use the [editor on GitHub](https://github.com/joy717/blog/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
