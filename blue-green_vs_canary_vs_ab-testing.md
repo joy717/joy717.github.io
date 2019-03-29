@@ -61,5 +61,5 @@ AB-Testing从出发点上，就与前两者不同。前两者是聚焦在部署�
 概念上，与金丝雀很类似，也是一部分用户M使用A版本，另外一部分用户N使用B版本。但是不同点在于，对于金丝雀来说，是小部分试用新版本，而AB-Testing，M,N在数量上并不一定是谁多谁少。并且A版本与B版本并不一定是一个新版本一个旧版本，而有可能两个都是同一个版本。更进一步说，AB-Testing并不是一种部署的方式，而是目的在于用户对于不同的操作、功能的使用反馈。版本上的区别，主要是集中在client端。而蓝绿发布与金丝雀发布，聚焦在server端的部署层面。
 
 ## 参考link
-[](https://martinfowler.com/bliki/BlueGreenDeployment.html)
-[](https://martinfowler.com/bliki/CanaryRelease.html)
+[https://martinfowler.com/bliki/BlueGreenDeployment.html](https://martinfowler.com/bliki/BlueGreenDeployment.html)
+[https://martinfowler.com/bliki/CanaryRelease.html](https://martinfowler.com/bliki/CanaryRelease.html)
