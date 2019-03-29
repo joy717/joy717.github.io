@@ -1,4 +1,4 @@
-#图解Kubernetes网络（一）
+# 图解Kubernetes网络（一）
 【编者的话】本文阐述了Kubernetes网络模型，并详细描述了Kubernetes Pods在节点内和节点间的通信方式，帮助读者在碰到Kubernetes网络问题时从容应对。
 
 你一直在Kubernetes集群中运行一系列服务并已从中获益，或者你正打算这么做。尽管有一系列工具能帮助你建立并管理集群，你仍困惑于集群底层是如何工作的，以及出现问题该如何处理。我曾经就是这样的。
@@ -23,7 +23,7 @@
 
 在每个Kubernetes节点（本场景指的是Linux机器）上，都有一个根（root）命名空间（root是作为基准，而不是超级用户）--root netns。
 
-最主要的网络接口 <font color=red><span style='background: pink'>eth0</span></font> 就是在这个root netns下。
+最主要的网络接口 <font color="red"><span style='background: pink'>eth0</span></font> 就是在这个root netns下。
 
 ![3](https://wiki.chinanetcenter.com/html/doc/20180720/3153207309232156.png "3")
 *Kubernetes Node（pod network namespace）*
@@ -138,8 +138,13 @@ Overlay网络不是默认必须的，但是它们在特定场景下非常有用�
 
 ### 原文链接：
 [中文翻译链接1](http://dockone.io/article/3211)
+
 [中文翻译链接2](http://dockone.io/article/3212)
+
 [中文翻译链接3](http://dockone.io/article/8436)
+
 [英文原文链接1](https://medium.com/@ApsOps/an-illustrated-guide-to-kubernetes-networking-part-1-d1ede3322727)
+
 [英文原文链接2](https://medium.com/@ApsOps/an-illustrated-guide-to-kubernetes-networking-part-2-13fdc6c4e24c)
+
 [英文原文链接3](https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-3-f35957784c8e)
