@@ -1,1 +1,5 @@
 theme: jekyll-theme-cayman
+author: joy717
+url: joy717.github.io
+plugins:
+  - jekyll-seo-tag
