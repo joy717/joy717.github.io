@@ -1,7 +1,7 @@
-#MetalLB 如何接管IP池
+# MetalLB 如何接管IP池
 MetalLB有2个组件，Controller跟Speaker.
 Controller负责k8s 的svc资源的修改，将IP池里的IP选择出来，设置进去.
-Speaker主要负责响应对应IP地址的ARP响应，(通过[https://github.com/mdlayher/arp](ARP开源库))，以及维护[https://github.com/hashicorp/memberlist](MemberList)
+Speaker主要负责响应对应IP地址的ARP响应，(通过[ARP开源库](https://github.com/mdlayher/arp)，以及维护[MemberList](https://github.com/hashicorp/memberlist)
 MemberList是一个开源组件，负责将节点都加入到一起，同时剔除失去响应的节点。保证MemberList里面都是可用的节点。
 
 流程：
