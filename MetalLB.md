@@ -1,4 +1,15 @@
 # MetalLB 如何接管IP池
+
+MetalLB只是简单的声明了一个IP池（哪怕是私有IP），就可以直接拿来用，而不需要修改网卡信息，这个是怎么做到的呢？
+
+答案是：`ARP`。当ARP请求某个IP池里的IP的时候，MetalLB将所在节点的Mac地址作为响应，发了出去。（有点类似ARP代理）
+
+因此，此IP相关的请求包会发到当前节点上。此后，就交给kube-proxy将请求分流到对应的pod上去了。
+
+如果外面的网络，希望通过IP池里面的IP访问集群的话，则需要节点网络之上的路由/交换机能将此IP路由到此网段中。
+
+
+# 架构
 MetalLB有2个组件，Controller跟Speaker。
 
 Controller负责k8s 的svc资源的修改，将IP池里的IP选择出来，设置进去。
@@ -7,7 +18,7 @@ Speaker主要负责对应IP地址的ARP响应，(通过[ARP开源库](https://gi
 
 MemberList是一个开源组件，负责将节点都加入到一个List里面，同时剔除失去响应的节点。保证MemberList里面都是可用的节点。
 
-流程：
+# 流程：
 1. 所有节点启动一个Pod Speaker(hostNetwork模式)，同时Speaker所在的节点作为一个member加入到MemberList里面。
 2. 当有LB类型的svc创建/更新时（通过client-go去watch相关资源），Controller组件从IP池里面选一个IP设置给这个SVC。
 
