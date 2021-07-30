@@ -7,3 +7,5 @@
 [图解k8s网络](/blog/k8s_networking)
 
 [CI/CD概念](/blog/ci_cd)
+
+[MetalLB如何接管IP池](/blog/MetalLB)
