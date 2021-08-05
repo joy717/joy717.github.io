@@ -22,3 +22,6 @@ Promethues的抓取对象，叫做`Target`，包含Rule，ServiceMonitor，PodMo
 由于ServiceMonitor是与namespace相关的，因此需要注意几个属性的设置：
 * `defaultRules.prometheus.prometheusSpec.serviceMonitorNamespaceSelector` Promethues只抓取有此labels的**namespace**底下的ServiceMonitor
 * `defaultRules.prometheusOperator.namespaces` 设置Promethues operator关心的namespaces. 换言之，在这些namespaces之外的`Target`，Promethues不管.
+
+## Links
+[https://kubevirt.io/2020/Monitoring-KubeVirt-VMs-from-the-inside.html](https://kubevirt.io/2020/Monitoring-KubeVirt-VMs-from-the-inside.html)
