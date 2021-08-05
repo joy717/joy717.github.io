@@ -9,3 +9,7 @@
 [CI/CD概念](/blog/ci_cd)
 
 [MetalLB如何接管IP池](/blog/MetalLB)
+
+[一篇不错的Vlan文章](/blog/vlan)
+
+[Promethues在k8s中的使用](/blog/promethues)
