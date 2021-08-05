@@ -1,8 +1,8 @@
-# Promethues在k8s中的使用：
+# 在k8s中上报数据给Promethues
 
 ## 如何将自定义的指标，对接入Promethues中呢？
 
-1. 在Pod上，起一个服务，暴露一个获取metrics的地址，比如说 /metrics，提供指标数据给Promethues抓取。（对于Promethues来说，叫做exporter），具体生成的数据，可以参考Promethues的exporter写法。
+1. 在Pod上，起一个服务，暴露一个获取metrics的地址，比如说 /metrics，提供指标数据给Promethues抓取。（对于Promethues来说，叫做exporter），具体生成的数据格式，可以参考Promethues的exporter写法。
 2. 创建Promethues识别的CRD抓取对象。（有很多种，这边以ServiceMonitor为例）Promethues会监控对应的CRD，从而根据配置去抓取数据。 
   * 创建一个独立的service，指向步骤1里的Pod
   * 创建一个ServiceMonitor，指向此service。
