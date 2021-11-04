@@ -13,3 +13,6 @@
 [一篇不错的Vlan文章](/blog/vlan)
 
 [Promethues在k8s中的使用](/blog/promethues)
+
+[多网卡路由设置](/blog/multi-interface-router)
+
