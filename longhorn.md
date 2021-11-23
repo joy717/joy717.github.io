@@ -19,5 +19,7 @@
 instance-manager pod里面包含：
 1. grpc服务（负责pod内process的管理）
 2. cli工具，数据封装/解封，调用步骤1的grpc服务，创建process
+
 process是用longhorn-engine（lonhorn的engineimage对应的二进制）这个cli启动的.
-longhorn-manager监听各种crd状态，通过调用instance-manager里的grpc服务，创建process
+
+longhorn-manager监听各种crd状态，通过调用instance-manager里的grpc服务，创建process. process再走iscsi相关流程.
