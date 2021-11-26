@@ -23,3 +23,20 @@ instance-manager pod里面包含：
 process是用longhorn-engine（lonhorn的engineimage对应的二进制）这个cli启动的.
 
 longhorn-manager监听各种crd状态，通过调用instance-manager里的grpc服务，创建process. process再走iscsi相关流程.
+
+### pod内服务
+
+代码项目longhorn-engine controller(engine) 提供grpc服务，控制volume、replicas、backup等。
+
+代码项目longhonr-engine replica：
+1. 提供grpc服务，控制replicas以及disk。 
+2. 提供一个rpc服务，数据传输。
+
+### 相关目录
+/dev/xxxx  iscisadm登录后，产生的本地设备
+
+/dev/longhorn/pvc-xxx longhorn设备. 通过mknod与iscisadm 登录后的设备同min/max number. csi-plugin会将此设备挂到/var/lib/kubelet/plugins/kubernetes.io/csi/volumeDevices/publish/pvc-xxxx.
+
+/var/lib/longhorn/replicas/pvc-xxx  最终落盘数据，存在此处
+
+instance-manager-e pod里面，/var/run/ 底下，有个对应pvc的socket. 作为iscsi的target lun.
