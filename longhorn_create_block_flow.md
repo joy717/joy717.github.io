@@ -142,6 +142,10 @@ e.Status.CurrentReplicaAddressMap = e.Spec.ReplicaAddressMap
 
 ### volume_controller sync:
 
+-> r.Spec.HealthyAt = vc.nowHandler(), r.Spec.RebuildRetryCount = 0
+
+-> v.Status.Robustness = healthy
+
 -> v.Status.State = attached
 
 总结： 此时一切正常，v.Status.State = attached, e.status.CurrentState = running, r.status.CurrentState = running, 各种相关的nodeID也有值。
