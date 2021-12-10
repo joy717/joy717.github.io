@@ -159,6 +159,6 @@ e.Status.CurrentReplicaAddressMap = e.Spec.ReplicaAddressMap
 
 
 
-
+## 其他
 instance_manager sync
 每一秒查询一次，instance-manager pod里面的processList，更新到status里面
