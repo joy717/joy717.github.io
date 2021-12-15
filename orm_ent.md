@@ -1,0 +1,9 @@
+golang orm框架ent
+https://github.com/ent/ent
+
+## 一些问题
+
+1. 使用上比较舒服，但是无法使用自定义sql。
+> 可以使用template，给client增加method，将sql.DB暴露出来。来执行raw sql2.
+
+2. 若不用raw sql的方式，edge的查询，每次都要额外单独查询一下。怀疑数据量比较大的情况下，性能比较差。
