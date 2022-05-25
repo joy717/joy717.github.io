@@ -1,6 +1,6 @@
 VLAN相关文档：
 
-a. host端不知道vlan tag。
+a. host端一般不知道vlan tag。除非host端用软件方式来做交换机
 
 b. 离开Access口或者Trunk口时候，如果当前带的tag与端口上设置的tag一致，则会untagged
 
