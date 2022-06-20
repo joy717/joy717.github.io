@@ -3,7 +3,7 @@
 现象为：只有第一个节点的部分命令得到执行
 原因是：`while read`从文件中读取的时候，需要指定`< abc.txt`来读取数据流，但这个会被ssh命令给拦截。
 
-*错误示范*
+**_错误示范_**
 ```
 #!/bin/bash
 kubectl get nodes --no-headers -o wide | grep -v master | awk '{print $6}' > hosts.txt
@@ -17,7 +17,7 @@ do
   scp /etc/docker/certs.d/1.2.3.4:10043/ca.crt root@$line:/etc/docker/certs.d/1.2.3.4:10043/ca.crt
 done < "$input"
 ```
-*应该修改为*
+**_应该修改为_**
 ```
 #!/bin/bash
 kubectl get nodes --no-headers -o wide | grep -v master | awk '{print $6}' > hosts.txt
