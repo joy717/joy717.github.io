@@ -27,8 +27,8 @@ input="hosts.txt"
 while IFS= read -r line
 do      
   echo $line
-  ssh $line mkdir -p "/etc/docker/certs.d/172.32.1.175:10043" < /dev/null
-  scp /etc/docker/certs.d/172.32.1.175:10043/ca.crt root@$line:/etc/docker/certs.d/172.32.1.175:10043/ca.crt < /dev/null
+  ssh $line mkdir -p "/etc/docker/certs.d/1.2.3.4:10043" < /dev/null
+  scp /etc/docker/certs.d/1.2.3.4:10043/ca.crt root@$line:/etc/docker/certs.d/1.2.3.4:10043/ca.crt < /dev/null
 done < "$input"
 ```
 > **_注意:_**  实际上，就是在ssh这些命令之后，加上一个 `< /dev/null` 来结束ssh相关的命令
