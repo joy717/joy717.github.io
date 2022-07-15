@@ -4,3 +4,7 @@ iptables set-xmark 解释：
 
 执行顺序：
 参考： https://www.jianshu.com/p/15bd803e3bb8
+
+
+iptables链路表：
+![iptables_workflow](https://user-images.githubusercontent.com/310284/179182094-5eb25e50-c7fc-4aab-8790-067be53a37f9.png)
