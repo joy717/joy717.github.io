@@ -3,9 +3,10 @@ iptables set-xmark 解释：
 参考： https://blog.csdn.net/qq_31977125/article/details/124208384
 
 
-执行顺序：
+详解：
 
 参考： https://www.jianshu.com/p/15bd803e3bb8
+https://www.digihunch.com/2020/11/ipvs-iptables-and-kube-proxy/
 
 
 iptables链路表：
