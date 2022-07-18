@@ -13,3 +13,9 @@ iptables链路表：
 
 iptables 扩展组件：
 https://ipset.netfilter.org/iptables-extensions.man.html
+
+
+iptables查看某个module的帮助
+```
+iptables -m addrtype --help
+```
