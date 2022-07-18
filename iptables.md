@@ -25,6 +25,9 @@ http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
 
 ![交互](http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/images/nf-lvs.png)
 
+ipvs与iptables优先级
+> Modules register with a priority, the lowest priority getting to look at the packets first. LVS registers itself with a higher priority than iptables rules, and thus iptables will get the packet first and then LVS
+
 
 ## iptables例子解释
 ```
