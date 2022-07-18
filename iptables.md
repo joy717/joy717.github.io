@@ -1,11 +1,12 @@
-iptables set-xmark 解释：
-
-参考： https://blog.csdn.net/qq_31977125/article/details/124208384
+iptables set-xmark 解释：https://blog.csdn.net/qq_31977125/article/details/124208384
 
 
-详解：
+各种JUMP的执行顺序：https://www.jianshu.com/p/15bd803e3bb8
 
-参考： https://www.jianshu.com/p/15bd803e3bb8
+
+kube-proxy iptable/ipvs 详解：
+
+https://zhuanlan.zhihu.com/p/94418251
 
 https://www.digihunch.com/2020/11/ipvs-iptables-and-kube-proxy/
 
