@@ -19,3 +19,12 @@ iptables查看某个module的帮助
 ```
 iptables -m addrtype --help
 ```
+
+
+## iptables例子解释
+```
+-A KUBE-SERVICES -m addrtype --dst-type LOCAL -j KUBE-NODEPORTS
+```
+解释：
+如果目标地址是LOCAL的，则jump到KUBE-NODEPORTS。
+什么是LOCAL？本地所有网卡上的IP地址，都属于LOCAL。换言之，如果是发往本机器（ip与网卡上任一匹配），则jump
