@@ -20,6 +20,11 @@ iptables查看某个module的帮助
 iptables -m addrtype --help
 ```
 
+ipvs与netfiler交互
+http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
+
+![交互](http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/images/nf-lvs.png)
+
 
 ## iptables例子解释
 ```
