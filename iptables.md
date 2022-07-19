@@ -39,6 +39,12 @@ http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
 
 ![iptables_workflow](https://segmentfault.com/img/bVbtpmK?w=831&h=346)
 
+> Linux路由表其实有2个主要概念：
+> * 路由策略（rule）
+> * 路由表（table）
+> 
+> Linux可以配置很多很多策略，数据包将依次通过各个策略，一旦匹配某个策略则进一步应用策略对应的路由表，如果当前路由表无法匹配到路由则继续执行后续策略匹配。
+
 
 
 ipvs与iptables优先级
