@@ -32,12 +32,11 @@ ipvs与netfilter交互
 
 http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
 
-![交互](http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/images/nf-lvs.png)
-
+![交互](https://user-images.githubusercontent.com/310284/179713789-221ca15a-d952-4bb2-ab9b-45e159bc2191.png)
 
 路由表与netfilter交互：
 
-![iptables_workflow](https://segmentfault.com/img/bVbtpmK?w=831&h=346)
+![image](https://user-images.githubusercontent.com/310284/179714017-02bc98aa-7752-44e4-b4e9-a1469d7ecdab.png)
 
 > Linux路由表其实有2个主要概念：
 > * 路由策略（rule）
