@@ -28,11 +28,6 @@ iptables查看某个module的帮助
 iptables -m addrtype --help
 ```
 
-ipvs与netfilter交互
-
-http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
-
-![交互](https://user-images.githubusercontent.com/310284/179713789-221ca15a-d952-4bb2-ab9b-45e159bc2191.png)
 
 路由表与netfilter交互：
 
@@ -46,11 +41,17 @@ http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
 
 
 
+ipvs与netfilter交互
+
+http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
+
+![交互](https://user-images.githubusercontent.com/310284/179713789-221ca15a-d952-4bb2-ab9b-45e159bc2191.png)
+
 ipvs与iptables优先级
 
 > Modules register with a priority, the lowest priority getting to look at the packets first. LVS registers itself with a higher priority than iptables rules, and thus iptables will get the packet first and then LVS
 
-所以，ipvs转发时：PREROUTING->路由表->INPUT(iptables)->INPUT(lvs)->路由表->POSTROUTING
+所以，ipvs转发时：PREROUTING->路由表->INPUT(iptables)->INPUT(lvs)->POSTROUTING
 
 
 ## iptables例子解释
