@@ -1,5 +1,7 @@
 **iptables set-xmark 解释** https://blog.csdn.net/qq_31977125/article/details/124208384
 
+**iptables -j(jump) -g(goto)区别** https://blog.csdn.net/zahuopuboss/article/details/8886612
+
 
 **各种JUMP的执行顺序** https://www.jianshu.com/p/15bd803e3bb8
 
