@@ -1,5 +1,6 @@
 **iptables set-xmark 解释** https://blog.csdn.net/qq_31977125/article/details/124208384
 
+
 **iptables -j(jump) -g(goto)区别** https://blog.csdn.net/zahuopuboss/article/details/8886612
 
 
@@ -57,10 +58,24 @@ http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
 
 
 ## iptables例子解释
+
+**addrtype 为LOCAL**
 ```
 -A KUBE-SERVICES -m addrtype --dst-type LOCAL -j KUBE-NODEPORTS
 ```
-解释：
 
 如果目标地址是LOCAL的，则jump到KUBE-NODEPORTS。
 什么是LOCAL？本地所有网卡上的IP地址，都属于LOCAL。换言之，如果是发往本机器（ip与网卡上任一匹配），则jump
+
+**iptables 空链表**
+
+```
+*raw
+:PREROUTING ACCEPT [0:0]
+:OUTPUT ACCEPT [37616:23606638]
+:cali-PREROUTING - [0:0]
+-A PREROUTING -m comment --comment "cali:6gwbT8clXdHdC1b1" -j cali-PREROUTING
+```
+
+这边可以看到，`-A PREROUTING -m comment --comment "cali:6gwbT8clXdHdC1b1" -j cali-PREROUTING`，jump到`cali-PREROUTING`，但`cali-PREROUTING`实际为空链表。
+估计是拿来预定义占坑用的。
