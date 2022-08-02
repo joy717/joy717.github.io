@@ -1,6 +1,8 @@
 **Tun/Tap Veth-pair 解释：**
+
 https://segmentfault.com/a/1190000041854027
-https://bbs.huaweicloud.com/blogs/152596#:~:text=TUN%2FTAP%E6%98%AFLinux%E4%B8%AD,%E6%8A%A5%E6%96%87%E7%94%A8%E7%9A%84%E7%BD%91%E7%BA%BF%E3%80%82
+
+https://bbs.huaweicloud.com/blogs/152596
 
 > TUN 和 TAP 设备的区别在于，TUN 设备是一个虚拟的端到端 IP 层设备，也就是说用户空间的应用程序通过 TUN 设备只能读写 IP 网络数据包（三层），而 TAP 设备是一个虚拟的链路层设备，通过 TAP 设备能读写链路层数据包（二层）
 
