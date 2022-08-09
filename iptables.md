@@ -79,3 +79,13 @@ http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
 
 这边可以看到，`-A PREROUTING -m comment --comment "cali:6gwbT8clXdHdC1b1" -j cali-PREROUTING`，jump到`cali-PREROUTING`，但`cali-PREROUTING`实际为空链表。
 估计是拿来预定义占坑用的。
+
+**bridge 配置**
+
+`-m physdev` 此module配置，是给bridge使用的。
+
+iptables与bridge配合使用，可参考：
+
+https://opengers.github.io/openstack/openstack-base-virtual-network-devices-bridge-and-vlan/
+与bridge
+
