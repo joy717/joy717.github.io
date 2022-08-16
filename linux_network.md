@@ -35,3 +35,7 @@ https://opengers.github.io/openstack/openstack-base-virtual-network-devices-brid
 **linux内核网络协议栈**
 
 https://zhuanlan.zhihu.com/p/379915285
+
+**tcp详解**
+
+https://blog.csdn.net/answer3lin/article/details/84780514
