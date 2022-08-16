@@ -21,7 +21,7 @@ https://bbs.huaweicloud.com/blogs/152596
 
 eth0网卡添加一个子设备eth0.100，配置VLAN100，将eth0.100加入到br0上，其他桥接在此br0上的设备，就都加入到此VLAN中，
 
-此时，eth0相当于是交换机会做tag添加/移除处理，根据不同的VLAN ID，发往eth0.x设备。
+此时，eth0相当于是交换机，会做tag添加/移除处理，根据不同的VLAN ID，发往eth0.x设备。
 
 可参考此文的VLAN部分
 
