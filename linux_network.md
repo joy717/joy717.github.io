@@ -38,6 +38,11 @@ https://zhuanlan.zhihu.com/p/379915285
 
 **tcp详解**
 
+seq number记录的是client/server各自的序列号。
+ack number记录的是从server/client(对方)，当前已接收的数据大小总和。（SYC/FIN包不带数据，同时会将seq+1作为ack的number）
+
+
+
 https://packetlife.net/blog/2010/jun/7/understanding-tcp-sequence-acknowledgment-numbers/
 
 https://blog.csdn.net/answer3lin/article/details/84780514
