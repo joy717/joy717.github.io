@@ -38,4 +38,6 @@ https://zhuanlan.zhihu.com/p/379915285
 
 **tcp详解**
 
+https://packetlife.net/blog/2010/jun/7/understanding-tcp-sequence-acknowledgment-numbers/
+
 https://blog.csdn.net/answer3lin/article/details/84780514
