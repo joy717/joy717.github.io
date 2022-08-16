@@ -92,3 +92,7 @@ iptables与bridge配合使用，可参考：
 https://opengers.github.io/openstack/openstack-base-virtual-network-devices-bridge-and-vlan/
 与bridge
 
+
+**k8s ipvs使用**
+
+https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-dive/
