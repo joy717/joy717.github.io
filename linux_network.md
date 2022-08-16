@@ -30,3 +30,8 @@ eth0网卡添加一个子设备eth0.100，配置VLAN100，将eth0.100加入到br
 可参考此文的VLAN部分
 
 https://opengers.github.io/openstack/openstack-base-virtual-network-devices-bridge-and-vlan/
+
+
+**linux内核网络协议栈**
+
+https://zhuanlan.zhihu.com/p/379915285
