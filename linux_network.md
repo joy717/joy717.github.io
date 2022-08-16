@@ -17,11 +17,15 @@ https://bbs.huaweicloud.com/blogs/152596
 ![image](https://user-images.githubusercontent.com/310284/182316321-bcf0cc01-d98f-47a0-ab0e-7ca014ffc5ce.png)
 
 
-**bridge+VLAN**
+**bridge+VLAN 作网络隔离**
 
 eth0网卡添加一个子设备eth0.100，配置VLAN100，将eth0.100加入到br0上，其他桥接在此br0上的设备，就都加入到此VLAN中，
 
 此时，eth0相当于是交换机，会做tag添加/移除处理，根据不同的VLAN ID，发往eth0.x设备。
+
+<img width="1058" alt="image" src="https://user-images.githubusercontent.com/310284/184836591-ea907d4c-289e-40b0-9e2b-f1227e7520e7.png">
+
+
 
 可参考此文的VLAN部分
 
