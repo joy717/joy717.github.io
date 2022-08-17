@@ -39,7 +39,8 @@ https://zhuanlan.zhihu.com/p/379915285
 **tcp详解**
 
 seq number记录的是client/server各自的序列号。
-ack number记录的是从server/client(对方)，当前已接收的数据大小总和。（接收到SYC/FIN包时，会将seq+1作为自己的ack number。由于SYC/FIN包不带数据，所以不影响）
+
+ack number记录的是从server/client(对方)，当前已接收的数据大小总和。（接收到SYC/FIN包时，会将seq+1作为自己的ack number发送给对方。）
 
 
 
