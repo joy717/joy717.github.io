@@ -47,3 +47,7 @@ ack number记录的是从server/client(对方)，当前已接收的数据大小�
 https://packetlife.net/blog/2010/jun/7/understanding-tcp-sequence-acknowledgment-numbers/
 
 https://blog.csdn.net/answer3lin/article/details/84780514
+
+例子详解
+
+https://www.golinuxcloud.com/tcp-sequence-acknowledgement-numbers/
