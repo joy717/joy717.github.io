@@ -96,3 +96,9 @@ https://opengers.github.io/openstack/openstack-base-virtual-network-devices-brid
 **k8s ipvs使用**
 
 https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-dive/
+
+**k8s nodeport svc + hostNetwork**
+
+NodePort类型的svc，如果后端的pod使用的是hostNetwork，则svc的nodeport无法正常访问。
+
+https://stackoverflow.com/questions/42480525/kubenetes-pod-hostnetwork-cause-nodeport-does-not-work
