@@ -69,6 +69,10 @@ http://www.austintek.com/LVS/LVS-HOWTO/HOWTO/LVS-HOWTO.filter_rules.html
 
 如果目标地址是LOCAL的，则jump到KUBE-NODEPORTS。
 什么是LOCAL？本地所有网卡上的IP地址，都属于LOCAL。换言之，如果是发往本机器（ip与网卡上任一匹配），则jump
+```
+ip route show table local type local
+```
+可显示所有的本地ip
 
 **iptables 空链表**
 
