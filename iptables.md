@@ -7,7 +7,11 @@
 **iptables -j(jump) -g(goto)区别** https://blog.csdn.net/zahuopuboss/article/details/8886612
 
 
-**各种JUMP的执行顺序** https://www.jianshu.com/p/15bd803e3bb8
+**各种JUMP的执行顺序** 
+
+https://www.jianshu.com/p/15bd803e3bb8
+
+https://www.flftuu.com/2021/07/12/iptables%E7%94%A8%E6%B3%95/
 
 
 **kube-proxy iptable/ipvs 详解**
