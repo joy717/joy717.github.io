@@ -1,2 +1,5 @@
-unix系统图谱
+## unix系统图谱
+
 https://static.kancloud.cn/chandler/mac_os/480595
+
+![image](https://user-images.githubusercontent.com/310284/195046344-a7a33e93-c993-4731-85ef-006d4ecc0a39.png)
