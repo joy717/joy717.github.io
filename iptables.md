@@ -110,3 +110,10 @@ https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-
 NodePort类型的svc，如果后端的pod使用的是hostNetwork，则svc的nodeport无法正常访问。
 
 https://stackoverflow.com/questions/42480525/kubenetes-pod-hostnetwork-cause-nodeport-does-not-work
+
+**允许iptables的trace**
+
+```
+modprobe nf_log_ipv4
+sysctl net.netfilter.nf_log.2=nf_log_ipv4
+```
