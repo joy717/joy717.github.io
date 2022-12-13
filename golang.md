@@ -23,3 +23,19 @@ y := user{name: "hello"}
 x := &y
 xaddr.name = "hola"
 ```
+
+3. golang泛型判断类型. (“手动擦除类型”)
+```
+type T interface{
+  int | int32...
+}
+
+func thisIsAFunc() {
+  var t T
+  switch realType := interface{}(t).(type){
+  case int:
+    fmt.Println(realType)
+  }
+...
+}
+```
