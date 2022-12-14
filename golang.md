@@ -39,3 +39,14 @@ func thisIsAFunc() {
 ...
 }
 ```
+或者：
+```
+func thisIsAFunc() {
+  var t T
+  switch realType := any(t).(type){
+  case int:
+    fmt.Println(realType)
+  }
+...
+}
+```
