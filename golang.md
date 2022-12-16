@@ -66,7 +66,7 @@ type notInHeapSlice struct {
 但**如果对slice增加元素等操作，比如使用append()，这有可能导致slice的改变无法传递到调用者。如果明确要增加元素等操作，需要将slice的指针作为参数传递。**
 
 > append() 当发现超过capacity的时候，会创建一个新的底层array，将原有的array元素copy到新的array上去。这样会导致sliceHeader指向的`array`改变。
-> 进而导致预期slice的修改无法生效的情况。
+> 进而导致预期slice的修改无法生效的情况。也许这就是为什么append()方法的左边必须有一个`=`来指定“接收者”，这样可以避免写代码的人错误的使用silce,即经过append()之后，slice的底层array可能已经是另外一个地址的array
 
 
 
