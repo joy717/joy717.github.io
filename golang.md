@@ -70,3 +70,11 @@ type notInHeapSlice struct {
 
 5. 判断是否为空的slice，应该判断`len(s) == 0`，而不是判断`s == nil`。因为slice可能非nil，但切片长度可能为0
 
+
+6. 当读取一个文件内容到[]byte中的时候，又只需要其中的一小部分，可以将底层的数组copy一份到新的slice，这样避免引用底层的数组，导致GC无法及时回收，而占用比较大的内存。
+```
+b, _ := ioutil.ReadFile(filename)
+b = b[10:20] // 对[]byte处理，这边只是简单示例，取其中一部分关心的数据
+result := append([]byte{}, b...)
+```
+
