@@ -86,3 +86,32 @@ func myFun()(result int) {
 	}
 }
 ```
+
+8. atomic比sync.Mutex性能高很多，可以搭配使用，来降低性能损耗
+```
+type singleton struct {}
+
+var (
+    instance    *singleton
+    initialized uint32
+    mu          sync.Mutex
+)
+
+func Instance() *singleton {
+    if atomic.LoadUint32(&initialized) == 1 {
+        return instance
+    }
+
+    mu.Lock()
+    defer mu.Unlock()
+
+    if instance == nil {
+        defer atomic.StoreUint32(&initialized, 1)
+        instance = &singleton{}
+    }
+    return instance
+}
+```
+
+
+部分代码参考: [Go语言高级编程](https://chai2010.cn/advanced-go-programming-book/index.html)
