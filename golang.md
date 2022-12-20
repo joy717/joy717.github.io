@@ -68,6 +68,5 @@ type notInHeapSlice struct {
 > append() 当发现超过capacity的时候，会创建一个新的底层array，将原有的array元素copy到新的array上去。这样会导致sliceHeader指向的`array`改变。
 > 进而导致预期slice的修改无法生效的情况。也许这就是为什么append()方法的左边必须有一个`=`来指定“接收者”，这样可以避免写代码的人错误的使用silce,即经过append()之后，slice的底层array可能已经是另外一个地址的array
 
-
-
+5. 判断是否为空的slice，应该判断`len(s) == 0`，而不是判断`s == nil`。因为slice可能非nil，但切片长度可能为0
 
