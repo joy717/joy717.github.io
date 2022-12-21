@@ -32,6 +32,7 @@ eth0网卡添加一个子设备eth0.100，配置VLAN100，将eth0.100加入到br
 https://opengers.github.io/openstack/openstack-base-virtual-network-devices-bridge-and-vlan/
 
 
+
 **linux内核网络协议栈**
 
 https://zhuanlan.zhihu.com/p/379915285
@@ -51,3 +52,15 @@ https://blog.csdn.net/answer3lin/article/details/84780514
 例子详解
 
 https://www.golinuxcloud.com/tcp-sequence-acknowledgement-numbers/
+
+
+**ip route命令**
+
+```
+# ip route 
+default via 172.31.12.1 dev br_bond0_44
+10.233.117.0/24 via 172.31.12.8 dev tunl0 proto bird onlink 
+```
+`via`的有意思是路由的下一跳应该去往172.31.12.8这个ip对应的mac地址。
+
+`路由`：会将dest mac地址替换成目的路由的mac地址。走二层网络到路由。
