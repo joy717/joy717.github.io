@@ -113,5 +113,8 @@ func Instance() *singleton {
 }
 ```
 
+9. 使用Goroutine一定要考虑泄露的可能性，需要保证有“退出机制”，比如context的Done的处理. 
+
+10. 主的goroutine无法保证其他子的goroutine都处理完毕了，才退出主的goroutine。因此可以利用sync.WaitGroup()给每个goroutine wg.Add(1)，主的goroutine用wg.Wait()阻塞住。
 
 部分代码参考: [Go语言高级编程](https://chai2010.cn/advanced-go-programming-book/index.html)
