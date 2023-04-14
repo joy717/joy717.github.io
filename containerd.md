@@ -7,4 +7,5 @@ k8s使用containerd作为cri，容器镜像通过dockerfile+docker来build，基
 2. **什么是snapshoter**
 
    当镜像拉取下来后，会是一个压缩的文件。将此文件解压到系统的某个目录里（比如overlayfs的snapshoter，对应的目录/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots)。方便容器启动后，直接以这个目录作为root文件系统。
+   https://github.com/containerd/containerd/blob/main/docs/snapshotters/README.md
 
