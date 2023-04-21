@@ -17,11 +17,14 @@ sysctl -p
 
 conntrack有个配置nf_conntrack_tcp_be_liberal。默认为0.
 
-此配置下，conntrack对于未能处理的packet（比如out of window）会标记成INVALID，并且不会做NAT处理。（访问svc ip时候，ipvs会做nat处理，转到后面的pod id）,但是会放行对应的包，
+此配置下，conntrack对于未能处理的packet（比如out of window）会标记成INVALID，并且不会做NAT处理，但是会放行对应的包，
 
-目标pod接收到这个包的时候，会发现自己不认识（因为之前都是通过svc nat过来），于是发了一个RST的包回到client端，不断重试，最终被关闭。
+目标pod接收到这个包的时候，会发现自己不认识（因为之前都是通过svc nat过来），于是发了一个RST的包回到client端，这个包的五元组（tcp+srcIP+srcPort+destIP+destPort）是合法的，因此关闭链接。
+
+> 访问svc ip时候，ipvs会做nat处理，转成后端的pod id
 
 > nf_conntrack_tcp_be_liberal - BOOLEAN 0 - disabled (default) not 0 - enabled 
+> 
 > Be conservative in what you do, be liberal in what you accept from others. If it's non-zero, we mark only out of window RST segments as INVALID.
 
 https://github.com/kubernetes/kubernetes/issues/74839
