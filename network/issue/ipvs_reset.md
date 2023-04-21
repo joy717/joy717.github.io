@@ -14,8 +14,11 @@ sysctl -p
 
 ## 原因
 通过tcpdump抓包，发现很多segment没有被捕获到，同时很多RST包，以及重试的Retransmission的包。
+
 conntrack有个配置nf_conntrack_tcp_be_liberal。默认为0.
+
 此配置下，conntrack对于未能处理的packet（比如out of window）会标记成INVALID，并且不会做NAT处理。（访问svc ip时候，ipvs会做nat处理，转到后面的pod id）,但是会放行对应的包，
+
 目标pod接收到这个包的时候，会发现自己不认识（因为之前都是通过svc nat过来），于是发了一个RST的包回到client端，不断重试，最终被关闭。
 
 > nf_conntrack_tcp_be_liberal - BOOLEAN 0 - disabled (default) not 0 - enabled 
