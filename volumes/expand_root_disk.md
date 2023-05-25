@@ -24,6 +24,8 @@ yum -y install cloud-utils-growpart
 
 ## 常规（直接基于物理硬盘的块设备）
 
+lsblk 查看mountPoint / type是part
+
 1. 给分区扩容
 ```
 # growpart <DeviceName> <PartionNumber>
@@ -46,6 +48,8 @@ df -h
 ```
 
 ## 基于lvm的块设备
+
+lsblk 查看mountPoint / type是lvm
 
 ### 没有growpart工具
 
