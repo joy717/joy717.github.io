@@ -96,7 +96,7 @@ xfs_growfs /
 df -hT
 ```
 
-### 使用growpart工具
+### 使用growpart工具(推荐)
 
 1. 扩容分区
 ```
