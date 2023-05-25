@@ -131,6 +131,7 @@ pvresize /dev/vda2
 lvresize -l +100%FREE /dev/centos/root
 # 验证
 lvdisplay
+lsblk
 ```
 3. 扩容文件系统
 ```
