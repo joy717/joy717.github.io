@@ -8,19 +8,19 @@ https://github.com/vmware-tanzu/sonobuoy/releases
 ## sonobuoy用的镜像：(有镜像需要翻墙，如果该环境无法翻墙，可以到其他可翻墙的机器下载，用docker save/load的方式导入该环境)
 sonobuoy images list --dry-run
 
-# 建议可翻墙的环境，由于sonobuoy会去拉取一些k8s.io的镜像来跑测试。如果无法翻墙，会导致很多测试失败，同时测试时间也会啦的很长
+> 建议可翻墙的环境，由于sonobuoy会去拉取一些k8s.io的镜像来跑测试。如果无法翻墙，会导致很多测试失败，同时测试时间也会啦的很长
 
 # 开始跑测试
 sonobuoy run --mode=certified-conformance
 
 # 查询状态
 sonobuoy status
+kubectl get pods -A
 
 # 查看日志
 sonobuoy logs
 
-# 获取结果，在./results目录
-
+# 获取结果，在./results目录，当sonobuoy status 提示已经completed，即可获取结果
 outfile=$(sonobuoy retrieve)
 mkdir ./results; tar xzf $outfile -C ./results
 
