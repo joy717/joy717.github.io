@@ -27,6 +27,7 @@ yum -y install cloud-utils-growpart
 lsblk 查看mountPoint `/` type是`part`
 
 1. 给分区扩容
+
 ```
 # growpart <DeviceName> <PartionNumber>
 growpart /dev/vda 1
@@ -37,7 +38,9 @@ LANG=en_US.UTF-8
 # 验证
 lsblk
 ```
+
 2. 给文件系统扩容
+
 ```
 # 由df -Th 来确认系统盘的文件系统类型，这边以xfs为例. ext系列用resize2fs代替xfs_growfs
 # xfs_growfs <mountpoint>
@@ -54,6 +57,7 @@ lsblk 查看mountPoint `/` type是`lvm`
 ### 没有growpart工具
 
 1. 创建新分区
+
 ```
 fdisk /dev/vda
 # 按顺序输入命令
@@ -69,7 +73,9 @@ partprobe
 ## 验证
 lsblk
 ```
+
 2. 调整lvm相关
+
 ```
 # 创建pv
 pvcreate /dev/vda3
@@ -90,7 +96,9 @@ lvresize -l +100%FREE /dev/centos/root
 lvdisplay
 lsblk
 ```
+
 3. 扩容文件系统
+
 ```
 # 由df -Th 来确认系统盘的文件系统类型，这边以xfs为例. ext系列用resize2fs代替xfs_growfs
 # xfs_growfs <mountpoint>
@@ -103,6 +111,7 @@ df -hT
 ### 使用growpart工具(推荐)
 
 1. 扩容分区
+
 ```
 # growpart <DeviceName> <PartionNumber>
 growpart /dev/vda 2
@@ -113,7 +122,9 @@ LANG=en_US.UTF-8
 # 验证
 lsblk
 ```
+
 2. 调整lvm相关
+
 ```
 # 将vda2对应的pv重新适配下大小
 pvresize /dev/vda2
@@ -133,7 +144,9 @@ lvresize -l +100%FREE /dev/centos/root
 lvdisplay
 lsblk
 ```
+
 3. 扩容文件系统
+
 ```
 # 由df -Th 来确认系统盘的文件系统类型，这边以xfs为例. ext系列用resize2fs代替xfs_growfs
 # xfs_growfs <mountpoint>
