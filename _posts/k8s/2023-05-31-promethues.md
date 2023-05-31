@@ -1,3 +1,8 @@
+---
+layout: post
+author: joy717
+---
+
 # 在k8s中上报数据给Promethues
 
 ## 如何将自定义的指标，对接入Promethues中呢？

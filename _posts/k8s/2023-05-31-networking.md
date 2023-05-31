@@ -1,3 +1,8 @@
+---
+layout: post
+author: joy717
+---
+
 # 图解Kubernetes网络（一）
 【编者的话】本文阐述了Kubernetes网络模型，并详细描述了Kubernetes Pods在节点内和节点间的通信方式，帮助读者在碰到Kubernetes网络问题时从容应对。
 

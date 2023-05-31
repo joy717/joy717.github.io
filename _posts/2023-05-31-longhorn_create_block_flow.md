@@ -1,3 +1,8 @@
+---
+layout: post
+author: joy717
+---
+
 ## csi总体流程:
 
 -> createVolume (结束后，pvc变成Bound状态)

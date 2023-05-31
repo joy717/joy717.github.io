@@ -1,3 +1,8 @@
+---
+layout: post
+author: joy717
+---
+
 k8s使用containerd作为cri，容器镜像通过dockerfile+docker来build，基础镜像为alpine
 问题：
 

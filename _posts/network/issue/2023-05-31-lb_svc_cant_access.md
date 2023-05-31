@@ -1,3 +1,8 @@
+---
+layout: post
+author: joy717
+---
+
 ## 背景
 k8s LB类型的service，在多网卡环境下，通过externalIP访问，有时候无法正常访问。
 
