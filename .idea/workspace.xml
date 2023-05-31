@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f1cd9af-17d1-461b-bb8b-727b9312959b" name="Default" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
+    <list default="true" id="9f1cd9af-17d1-461b-bb8b-727b9312959b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/blog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/blog.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MetalLB.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-metal_lb.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-05-31-test.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2023-05-31-test2.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/test333.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/zzz/2023-05-31-aaa.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bash.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-bash.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blue-green_vs_canary_vs_ab-testing.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-blue_green_vs_canary_vs_ab_testing.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calico.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/2023-05-31-calico.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ceph.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-ceph.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ci_cd.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-ci_cd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/containerd.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-containerd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy_k8s_kubeadm.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/k8s/2023-05-31-deploy_kubeadm.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-docker.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker_img_pull_push.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-docker_img_pull_push.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate_key_certs.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-generate_key_certs.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go_mod.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/golang/2023-05-31-go_mod.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/golang/2023-05-31-golang.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang_ticker.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/golang/2023-05-31-ticker.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/iptables/iptables_workflow.png" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/iptables/iptables_workflow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/10.png" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/5.gif" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/5.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/6.gif" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/6.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/k8s_networking/9.gif" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/images/k8s_networking/9.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iptables.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/2023-05-31-iptables.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s_kscp.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/k8s/2023-05-31-kscp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s_metrics.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/k8s/2023-05-31-metrics.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s_networking.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/k8s/2023-05-31-networking.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s_starter.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/k8s/2023-05-31-starter.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s_tips.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/k8s/2023-05-31-tips.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kube-proxy.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/k8s/2023-05-31-kube_proxy.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux_network.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/2023-05-31-linux_network.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/longhorn.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-longhorn.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/longhorn_create_block_flow.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-longhorn_create_block_flow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/markdown.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-markdown.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-interface-router.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/2023-05-31-multi_interface_router.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/network/issue/ipvs_reset.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/issue/2023-05-31-ipvs_reset.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/network/issue/lb_svc_cant_access.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/issue/2023-05-31-lb_svc_cant_access.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orm_ent.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-orm_ent.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-os.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promethues.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-promethues.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssh.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/2023-05-31-ssh.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_handshake.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/2023-05-31-tcp_handshake.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/virtualization.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-virtualization.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vlan.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/network/2023-05-31-vlan.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/volumes/expand_root_disk.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/volumes/2023-05-31-expand_root_disk.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yaml.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2023-05-31-yaml.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,11 +79,12 @@
       </file>
     </leaf>
   </component>
-  <component name="GOROOT" path="/usr/local/Cellar/go/1.10.3/libexec" />
+  <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="true" />
     <option name="urls">
       <list>
         <option value="file:///work/app/ws/cloud/ops-go-brances" />
@@ -46,6 +104,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
@@ -54,6 +115,7 @@
     <option name="width" value="1440" />
     <option name="height" value="825" />
   </component>
+  <component name="ProjectId" id="2QYKJE7wdVHjiGYM5KyUR03p7Wb" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -73,28 +135,36 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
-    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
-    <property name="go.gopath.indexing.explicitly.defined" value="true" />
-    <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/vincent/projects/github.com/joy717/blog",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_posts/golang" />
+      <recent name="$PROJECT_DIR$/_posts/network" />
+      <recent name="$PROJECT_DIR$/_posts/k8s" />
+      <recent name="$PROJECT_DIR$/_posts" />
+    </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1440" height="825" extended-state="6" />
     <editor active="true" />
@@ -122,10 +192,11 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="VgoProject">
+    <integration-enabled>false</integration-enabled>
+    <settings-migrated>true</settings-migrated>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/k8s_networking.md">
