@@ -1,9 +1,11 @@
 # 修改hosts文件，每个节点都要
+```
 cat >> /etc/hosts << EOF
 172.20.17.133 k8s-1
 172.20.20.56 k8s-2
 172.20.17.243 k8s-3
 EOF
+```
 
 # 修改hostname，每个节点修改成自己的名字
 hostnamectl set-hostname k8s-1
