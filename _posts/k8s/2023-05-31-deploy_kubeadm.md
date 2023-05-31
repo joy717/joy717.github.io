@@ -1,8 +1,3 @@
----
-layout: post
-author: joy717
----
-
 # 修改hosts文件，每个节点都要
 ```
 cat >> /etc/hosts << EOF

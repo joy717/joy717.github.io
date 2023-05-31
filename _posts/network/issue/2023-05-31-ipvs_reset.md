@@ -1,8 +1,3 @@
----
-layout: post
-author: joy717
----
-
 # 现象
 k8s 使用ipvs，跨节点访问svc，频繁出现Connection reset by peer的错误
 

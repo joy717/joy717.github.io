@@ -1,8 +1,3 @@
----
-layout: post
-author: joy717
----
-
 **Here are 2 ways to create key and crt.**
 
 ## 1. Using golang tool:

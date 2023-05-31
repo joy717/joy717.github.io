@@ -1,8 +1,3 @@
----
-layout: post
-author: joy717
----
-
 **tcp详解**
 
 seq number记录的是client/server各自的序列号。
