@@ -1,12 +1,13 @@
 ---
 layout: default
-title:  "Welcome to Joy717's World!"
+title:  Blog
 ---
 <html>
 <ul>
   {% for post in site.posts %}
   <li>
-    <a href="/blog{{ post.url }}">{{ post.title }}</a>
+    <h2><a href="blog{{ post.url }}">{{ post.title }}</a></h2>
+    {{ post.excerpt }}
   </li>
   {% endfor %}
 </ul>
