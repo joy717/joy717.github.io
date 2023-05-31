@@ -1,7 +1,6 @@
 theme: jekyll-theme-cayman
 author: joy717
-url: joy717.github.io
-baseurl: /blog/
+url: joy717.github.io/blog
 lang: zh_CN
 plugins:
   - jekyll-seo-tag
