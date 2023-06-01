@@ -11,6 +11,7 @@ title:  Blog
     </li>
     {% endfor %}
 </ul>
+{% if paginator.total_pages > 1 %}
 <div class="pagination">
     {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; Prev</a>
@@ -34,5 +35,6 @@ title:  Blog
     <span>Next &raquo;</span>
     {% endif %}
 </div>
+{% endif %}
 </html>
 
