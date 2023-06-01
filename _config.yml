@@ -1,6 +1,7 @@
 theme: jekyll-theme-cayman
 author: joy717
-url: joy717.github.io/blog
+url: joy717.github.io
+baseurl: /blog
 lang: zh_CN
 markdown: CommonMarkGhPages
 plugins:
