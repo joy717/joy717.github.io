@@ -3,6 +3,7 @@ author: joy717
 domain: joy717.github.io
 url: https://joy717.github.io
 lang: zh_CN
+permalink: /:categories/:title:output_ext
 markdown: CommonMarkGhPages
 plugins:
   - jekyll-seo-tag
