@@ -2,7 +2,6 @@ theme: jekyll-theme-cayman
 author: joy717
 url: joy717.github.io/blog
 lang: zh_CN
-markdown: CommonMarkGhPages
 plugins:
   - jekyll-seo-tag
   - jekyll-readme-index
