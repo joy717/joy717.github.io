@@ -1,3 +1,7 @@
+---
+ categories:
+   - network
+---
 # 多网卡路由设置(source-based routing, policy-based routing)
 
 ## 背景
