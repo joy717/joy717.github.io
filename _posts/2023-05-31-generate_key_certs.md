@@ -1,3 +1,6 @@
+---
+title: 生成自签名证书
+---
 **Here are 2 ways to create key and crt.**
 
 ## 1. Using golang tool:
