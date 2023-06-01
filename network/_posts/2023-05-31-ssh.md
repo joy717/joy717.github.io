@@ -1,0 +1,7 @@
+## 修改ssh的key以及fingerprint
+```
+rm -rf /etc/ssh/ssh_host_*
+ssh-keygen -A
+# client端删除know_hosts里面对应的信息
+ssh-keygen -R 192.168.1.1
+```
