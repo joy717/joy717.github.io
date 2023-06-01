@@ -1,5 +1,5 @@
 ---
-title: kube部署k8s
+title: kubeadm部署k8s
 ---
 # 修改hosts文件，每个节点都要
 ```
