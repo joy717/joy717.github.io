@@ -4,6 +4,7 @@ domain: joy717.github.io
 url: https://joy717.github.io
 lang: zh_CN
 paginate: 5
+paginate_path: "/blog/page:num/"
 markdown: CommonMarkGhPages
 plugins:
   - jekyll-seo-tag
