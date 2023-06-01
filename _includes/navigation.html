@@ -18,14 +18,18 @@
         }
 
         /* Change the link color to #111 (black) on hover */
-        nav a:hover {
+        nav a:hover:not(.active) {
             background-color: #111;
+        }
+
+        nav .active {
+            background-color: #04AA6D;
         }
     </style>
 </head>
 <nav>
     {% for item in site.data.navigation %}
-    <a href="{{ item.link }}" {% if page.url == item.link %}style="color: red;"{% endif %}>
+    <a href="{{ item.link }}" {% if page.url == item.link %}class="active"{% endif %}>
         {{ item.name }}
     </a>
     {% endfor %}
