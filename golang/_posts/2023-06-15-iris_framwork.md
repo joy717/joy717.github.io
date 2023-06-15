@@ -17,10 +17,15 @@ client（浏览器等）→ 反向代理服务器 → 上游服务
 经过排查，该问题的直接原因是：response的返回值的数据大小与声明的http header `Content-Length`不符。
 
 通过debug排查发现，上游返回的数据大小与`Content-Length`相符，
+
 经过代理服务器返回给client的时候，iris日志里面显示 `abort Handler` 以及 `http: wrote more than the declared Content-Length` 等错误。
+
 也就是代理服务器转发给前端的时候，数据大小超过了`Content-Length`。
+
 为什么数据的大小会改变呢？
+
 通过排查发现，一般iris会设置压缩，也就是gzip，导致传送给client的数据大小与`Content-Length`声明的不符。
+
 由于上游返回给代理服务器的时候，没有使用压缩，同时也设置了`Content-Length`，因此代理服务器转发给client的时候，会直接使用`Content-Length`的header，但实际数据却经过了压缩。
 
 ### 解决
@@ -63,6 +68,7 @@ func (c *myController) BeforeActivation(b mvc.BeforeActivation) {
 ```
 
 由于上游服务器有自己多种的http method（get/post/put等），也有自己的URL路径，如果将反向代理服务器，作为iris mvc的一个普通路由，会有以下问题：
+
 1. 如何设置多种http method？
 2. 如何一个路由同时匹配 /fileServer/xxxxx/yyy，/fileServer/aaaa/bbbb/ccc 等路径？
 
