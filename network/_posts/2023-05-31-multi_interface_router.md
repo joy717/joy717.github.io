@@ -23,6 +23,7 @@ sudo sh -c 'echo 200 isp2 >> /etc/iproute2/rt_tables'
 将所有请求10.8.0.10的流量都导向`isp2`进行路由.(添加ip rule规则)
 ```
 ip rule add from 10.8.0.10 table isp2
+ip rule add to 10.8.0.10 table isp2
 ```
 给这张路由表添加默认路由：
 ```
