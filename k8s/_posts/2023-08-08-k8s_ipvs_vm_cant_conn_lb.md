@@ -1,6 +1,8 @@
 ---
 title: ipvs模式下，节点上的vm无法访问lb
-category: network,k8s
+categories: 
+- network
+- k8s
 ---
 
 # 现象
