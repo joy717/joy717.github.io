@@ -39,7 +39,7 @@ cni只定义了一些接口行为，只要实现了这些接口的，都可以�
 
 ### 同节点
 
-<img width="421" alt="image" src="https://github.com/joy717/joy717.github.io/assets/310284/ce672c91-2d84-4b49-b73e-dc6554b09fd7">
+![](https://github.com/joy717/joy717.github.io/assets/310284/ce672c91-2d84-4b49-b73e-dc6554b09fd7){:height="100px" width="100px"}
 
 容器内有一张eth0的网卡，对应host（宿主机，以下简称host）有一张对应的calixxxx的网卡，这两张网卡通过veth-pair连接起来。
 
@@ -55,7 +55,7 @@ host上所有的pod都有一张calixxxx的网卡，路由表内，每一张calix
 
 ### 跨节点
 
-<img width="988" alt="image" src="https://github.com/joy717/joy717.github.io/assets/310284/1c2c0056-3e29-4f73-9fbd-c51e05f98fbb">
+![](https://github.com/joy717/joy717.github.io/assets/310284/1c2c0056-3e29-4f73-9fbd-c51e05f98fbb)
 
 每个节点有张网卡vxlan.calico，这个相应于是该节点的calico网关，所有跨节点的pod请求，都会经过这个网关。
 
