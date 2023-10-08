@@ -39,7 +39,7 @@ cni只定义了一些接口行为，只要实现了这些接口的，都可以�
 
 ### 同节点
 
-![](https://github.com/joy717/joy717.github.io/assets/310284/ce672c91-2d84-4b49-b73e-dc6554b09fd7){:height="100px" width="100px"}
+![](https://github.com/joy717/joy717.github.io/assets/310284/ce672c91-2d84-4b49-b73e-dc6554b09fd7)
 
 以这个Pod为例
 ```
