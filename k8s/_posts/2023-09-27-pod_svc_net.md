@@ -41,13 +41,60 @@ cni只定义了一些接口行为，只要实现了这些接口的，都可以�
 
 ![](https://github.com/joy717/joy717.github.io/assets/310284/ce672c91-2d84-4b49-b73e-dc6554b09fd7){:height="100px" width="100px"}
 
+以这个Pod为例
+```
+[root@k8s-1 ~]# kubectl get pods centos-1 -o wide
+NAME                          READY   STATUS    RESTARTS   AGE   IP               NODE    NOMINATED NODE   READINESS GATES
+centos-1   1/1     Running   0          15h   10.233.114.176   k8s-1   <none>           <none>
+```
+
 容器内有一张eth0的网卡，对应host（宿主机，以下简称host）有一张对应的calixxxx的网卡，这两张网卡通过veth-pair连接起来。
 
+```
+# 容器内
+[root@k8s-1 ~]# kubectl exec centos-1 -- ip link
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+3: eth0@if204: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1430 qdisc noqueue state UP mode DEFAULT group default
+    link/ether 92:de:d0:8f:9a:1b brd ff:ff:ff:ff:ff:ff link-netnsid 0
+ 
+# 宿主机
+[root@k8s-1 ~]# ip link | grep -A 1 "204:"
+204: cali232bd664ad4@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1430 qdisc noqueue state UP mode DEFAULT group default
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netnsid 16
+```
+
 pod内的默认路由为169.254.1.1的网关，但此网关ip实际不存在。
+
+```
+
+[root@k8s-1 ~]# kubectl exec centos-1 -- ip route
+default via 169.254.1.1 dev eth0
+169.254.1.1 dev eth0 scope link
+```
 
 calico将calixxxx的proxy_arp(`/proc/sys/net/ipv4/conf/calixxxx/proxy_arp`)打开，因此pod内访问169.254.1.1的时候，calixxxx会做ARP响应，将自己的mac地址返回给pod。即calixxxx成为了pod的默认网关。
 
 host上所有的pod都有一张calixxxx的网卡，路由表内，每一张calixxxx的网卡都有一条路由记录（ip route），将pod ip跟对应网卡“绑定”起来。(也正因为这些路由规则，所以实际上calixxxx的mac地址并不重要)
+
+```
+[root@k8s-1 ~]# ip route
+default via 172.31.13.1 dev br_bond0_45
+10.233.77.64/26 via 10.233.77.64 dev vxlan.calico onlink
+10.233.81.192/26 via 10.233.81.192 dev vxlan.calico onlink
+blackhole 10.233.114.128/26 proto 80
+10.233.114.129 dev caliac61247354c scope link
+10.233.114.168 dev cali925697ccade scope link
+10.233.114.169 dev cali6332045ecc3 scope link
+10.233.114.170 dev calie1bbc3ec1eb scope link
+10.233.114.171 dev cali03edef3d831 scope link
+10.233.114.175 dev cali6e2f0fd53fe scope link
+10.233.114.176 dev cali232bd664ad4 scope link # 我们关心的Pod
+10.233.114.177 dev caliab1996a0cfe scope link
+10.233.114.178 dev cali229ab65b360 scope link
+10.233.114.181 dev cali9d3714ebc6f scope link
+10.233.114.182 dev cali08f4200b4c6 scope link
+```
 
 因此本节点内pod到pod的网络，从pod1内的eth0出来，经过对应的calixxxx的网卡，再通过host的路由表，往对应的caliyyyy的网卡上走，最终进入pod2的eth0。
 
@@ -55,11 +102,26 @@ host上所有的pod都有一张calixxxx的网卡，路由表内，每一张calix
 
 ### 跨节点
 
-![](https://github.com/joy717/joy717.github.io/assets/310284/1c2c0056-3e29-4f73-9fbd-c51e05f98fbb)
+![](https://github.com/joy717/joy717.github.io/assets/310284/3aac95e5-9882-48d7-a998-d3c188292130)
 
-每个节点有张网卡vxlan.calico，这个相应于是该节点的calico网关，所有跨节点的pod请求，都会经过这个网关。
+每个节点有张网卡vxlan.calico，这个相当于是该节点的calico网关，所有跨节点的pod请求，都会经过这个"网关"（通过查询host的main路由表），之后通过overlay（这边使用vxlan），数据包外面包了一层host的ip，走host的网络，到达节点2，解包，再根据节点2上main路由表目标Pod的路由，进到目标Pod里面。
 
-之后通过overlay（这边使用vxlan），通过host的物理网卡，到另外一个节点，之后解包，再一路进到pod里面。
+```
+# 从节点1的Pod 10.233.114.178 访问节点2的Pod10.233.81.239
+# source节点1
+[root@k8s-1 ~]# ip route
+default via 172.31.13.1 dev br_bond0_45
+10.233.77.64/26 via 10.233.77.64 dev vxlan.calico onlink
+10.233.81.192/26 via 10.233.81.192 dev vxlan.calico onlink #匹配这条路由，下一跳从vxlan.calico出去
+ 
+# iptables nat表：
+-A cali-POSTROUTING -o vxlan.calico -m comment --comment "cali:e9dnSgSVNmIcpVhP" -m addrtype ! --src-type LOCAL --limit-iface-out -m addrtype --src-type LOCAL -j MASQUERADE
+ 
+# target节点2
+# 到了节点2后，解包，之后匹配以下路由，到达对应的Pod
+[root@k8s-2 ~]# ip r | grep '10.233.81.239'
+10.233.81.239 dev cali738a11cf833 scope link
+```
 
 
 calico有很多iptables规则，具体的规则解析可以参考 https://cloud.tencent.com/developer/article/1482739
