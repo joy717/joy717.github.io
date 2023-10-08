@@ -153,6 +153,19 @@ kube-proxy在节点上会创建iptables+ipvs规则，通过这个方式做lb的v
 
 由于使用的是ipvs模式，会在每个节点上创建一个kube-ipvs0的网卡，上面绑定了所有service的vip(ip addr show kube-ipvs0)，但此网卡ARP是禁用的，即（NOARP，同时网卡也是DOWN的，因为不希望也不应该通过此网卡做ARP响应，因为每个节点上都有此网卡，以及对应的ip地址，如果开启arp响应，则会导致冲突）
 
+```
+[root@k8s-1 ~]# ip a show kube-ipvs0
+14: kube-ipvs0: <BROADCAST,NOARP> mtu 1500 qdisc noop state DOWN group default 
+    link/ether 76:ee:bd:d5:6a:b4 brd ff:ff:ff:ff:ff:ff
+    inet 10.233.61.203/32 scope global kube-ipvs0
+       valid_lft forever preferred_lft forever
+    inet 10.233.26.114/32 scope global kube-ipvs0
+       valid_lft forever preferred_lft forever
+    inet 10.233.28.61/32 scope global kube-ipvs0
+       valid_lft forever preferred_lft forever
+...
+```
+
 由于k8s的service ip实际并不是一个真正的ip地址，而是k8s节点上的一个vip，因此节点之外，其实是无法直接访问service ip的。
 
 k8s提供NodePort以及LoadBalancer的两种类型的service，提供集群之外的网络访问。
