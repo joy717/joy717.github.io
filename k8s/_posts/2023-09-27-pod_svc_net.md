@@ -8,9 +8,11 @@ k8s集群调度的最小单位，一个pod由一个或者若干个容器组成�
 
 ## service
 
-一个逻辑上的概念，概念上等同于LB（LoadBalancer）。使用iptables/ipvs达到流量转发的目的。
+一个逻辑上的概念，概念上等同于LB（LoadBalancer）。主要为了负载均衡以及流量转发。
 
-访问service，实际访问的是service的后端对应的pod。
+访问service，实际访问的是service的后端对应的pod，使用iptables/ipvs将访问vip的流量转发到后端的Pod。
+
+背景：
 
 由于k8s内，pod每次重启之后，ip会变化，因此k8s使用service来固化访问地址。服务之间调用的时候，统一使用service的ip。lb的后端由k8s的组件动态的调整。
 
