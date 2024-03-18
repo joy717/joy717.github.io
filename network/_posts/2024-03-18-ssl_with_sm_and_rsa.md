@@ -13,3 +13,10 @@
 怀疑，基于SNI（https://zh.wikipedia.org/wiki/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8D%E7%A7%B0%E6%8C%87%E7%A4%BA）
 
 即在握手时，告诉服务端，自己使用什么加密方式的证书、域名等。（只是猜测）
+
+## 其他
+阿里有自己开源了一个ssl： [铜锁](https://github.com/Tongsuo-Project/Tongsuo)
+
+暂时可作为openssl的上位替代品
+
+
