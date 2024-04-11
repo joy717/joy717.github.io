@@ -8,17 +8,17 @@ https://yangzhe.me/2018/12/29/the-law-of-reflection/
 
 ## 核心
 
-1. 每个变量都是interface{}，存储记录了2个信息（pair），(“值”，“值对应的类型”)， 比如
+1. 在golang里面，每个变量都是interface{}，存储记录了2个信息（pair），(“值”，“值对应的类型”)， 比如
 ```
-var i int = 3。 记录的是（3, int）
+var i int = 3 // 记录的是（3, int）
+
+// 对于interface类型，记录的是实际类型（concrete type，即non-interface）
+var err error
+err = errors.New("myErr") //记录的是 ("myErr", *errors.errorString )
+fmt.Println(reflect.TypeOf(err)
 ```
   > One important detail is that the pair inside an interface variable always has the form (value, concrete type) and cannot have the form (value, interface type). Interfaces do not hold interface values.
-  > 即如果变量是个接口（interface），记录的类型，是实际的类型，而不是接口的类型
-```
-fmt.Println(reflect.TypeOf(errors.New("myErr")))
-// 结果不是errors.error （接口类型），而是：
-// *errors.errorString 
-```
+
 3. 反射中的2个主要类型，reflect.Value与reflect.Type与上面的对应，即“值”，“值对应的类型”。
 4. 所有反射，都是基于以上几点在玩的。即 “值” “值对应的类型” 之间的各种操作。
 
