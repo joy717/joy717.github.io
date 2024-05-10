@@ -54,6 +54,23 @@ gpgcheck=0
 repo_gpgcheck=0
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF
+
+#如果是安装1.30版本，使用这个：
+
+cat >> /etc/yum.repos.d/kubernetes.repo << EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.30/rpm
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.30/rpm/repodata/repomd.xml.key
+EOF
+
+
+
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+ 
  
 yum clean all
 yum makecache fast
@@ -93,7 +110,7 @@ systemctl enable docker --now
 # 下载安装cri-dockerd，每个节点都要
 
 ```
-https://github.com/Mirantis/cri-dockerd/releases
+# 从这边获rpm包：  https://github.com/Mirantis/cri-dockerd/releases
 yum -y install cri-dockerd-0.2.5-3.el7.x86_64.rpm
 ```
 
@@ -122,6 +139,7 @@ systemctl enable cri-docker --now
 
 ```
 yum -y install kubeadm kubectl kubelet
+systemctl enable kubelet --now
 ```
 
 # 安装kubectl命令自动补充，每个节点都要（可选）
