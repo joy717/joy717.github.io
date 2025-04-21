@@ -10,3 +10,8 @@
 当一个程序发起一个tcp包，会通过socket API与内核里面的TCP栈交互，内核里的TCP栈就会将传递过来的数据，封装成TCP包，增加tcp的header，分包等动作，之后转交给其他的网络层，比如进一步处理成底层的包.
 
 同时实现了TCP协议里面的“可靠性”相关的功能，比如按顺序传包（收包），
+
+
+# 参考
+
+https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2024-04-1/NET-2024-04-1_16.pdf
