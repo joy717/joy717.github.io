@@ -71,7 +71,7 @@ HTTP（HyperText Transfer Protocol）是互联网上应用最广泛的协议之�
 
 HTTP/3代表了未来方向，但全面普及仍需时间（需操作系统、浏览器、服务器生态支持）。
 
-**这篇解释更详细**
+**这篇解释更详细，强烈建议多次通读**
 
 https://zhuanlan.zhihu.com/p/330300133
 
