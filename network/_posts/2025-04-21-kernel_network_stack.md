@@ -17,3 +17,7 @@
 网络包（packet）在linux内核网络栈中的工作流
 
 https://www.net.in.tum.de/fileadmin/TUM/NET/NET-2024-04-1/NET-2024-04-1_16.pdf
+
+https://medium.com/@dipakkrdas/netfilter-and-iptables-f8a946bb83af
+
+https://amrelhusseiny.github.io/blog/004_linux_0001_understanding_linux_networking/004_linux_0001_understanding_linux_networking_part_1/
